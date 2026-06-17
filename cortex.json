@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-secret-rotation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Detect hardcoded secrets, rotate credentials, update Cortex vault",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -19,25 +19,68 @@
       "name": "secrets_scan",
       "description": "Scan a target path for hardcoded secrets using built-in patterns",
       "params": [
-        { "name": "target_path", "type": "string", "description": "Path to the directory or file to scan", "required": true },
-        { "name": "patterns", "type": "string", "description": "Comma-separated pattern categories: aws,github,stripe,generic", "required": false },
-        { "name": "exclude_dirs", "type": "string", "description": "Comma-separated directories to exclude", "required": false }
+        {
+          "name": "target_path",
+          "type": "string",
+          "description": "Path to the directory or file to scan",
+          "required": true
+        },
+        {
+          "name": "patterns",
+          "type": "string",
+          "description": "Comma-separated pattern categories: aws,github,stripe,generic",
+          "required": false
+        },
+        {
+          "name": "exclude_dirs",
+          "type": "string",
+          "description": "Comma-separated directories to exclude",
+          "required": false
+        }
       ]
     },
     {
       "name": "secrets_rotate",
       "description": "Rotate a detected secret credential",
       "params": [
-        { "name": "secret_type", "type": "string", "description": "Type of secret to rotate", "required": true, "enum": ["aws_access_key", "aws_secret_key", "github_token", "stripe_key", "gcp_key", "azure_key"] },
-        { "name": "resource_id", "type": "string", "description": "ID of the key or resource to rotate", "required": true }
+        {
+          "name": "secret_type",
+          "type": "string",
+          "description": "Type of secret to rotate",
+          "required": true,
+          "enum": [
+            "aws_access_key",
+            "aws_secret_key",
+            "github_token",
+            "stripe_key",
+            "gcp_key",
+            "azure_key"
+          ]
+        },
+        {
+          "name": "resource_id",
+          "type": "string",
+          "description": "ID of the key or resource to rotate",
+          "required": true
+        }
       ]
     },
     {
       "name": "secrets_audit_trail",
       "description": "Get the audit trail of secret rotations",
       "params": [
-        { "name": "since", "type": "string", "description": "ISO date to filter rotations from", "required": false },
-        { "name": "secret_type", "type": "string", "description": "Filter by secret type", "required": false }
+        {
+          "name": "since",
+          "type": "string",
+          "description": "ISO date to filter rotations from",
+          "required": false
+        },
+        {
+          "name": "secret_type",
+          "type": "string",
+          "description": "Filter by secret type",
+          "required": false
+        }
       ]
     },
     {
@@ -45,17 +88,45 @@
       "description": "Update a Cortex vault entry with a new secret value",
       "params": [
         { "name": "key", "type": "string", "description": "Vault key to update", "required": true },
-        { "name": "new_value", "type": "string", "description": "New secret value", "required": true },
-        { "name": "old_value_hash", "type": "string", "description": "SHA-256 hash of the old value for verification", "required": false }
+        {
+          "name": "new_value",
+          "type": "string",
+          "description": "New secret value",
+          "required": true
+        },
+        {
+          "name": "old_value_hash",
+          "type": "string",
+          "description": "SHA-256 hash of the old value for verification",
+          "required": false
+        }
       ]
     },
     {
       "name": "secrets_generate",
       "description": "Generate a new cryptographically secure secret",
       "params": [
-        { "name": "type", "type": "string", "description": "Type of secret to generate", "required": false, "default": "token", "enum": ["password", "api_key", "token", "rsa_key"] },
-        { "name": "length", "type": "number", "description": "Length of the generated secret", "required": false, "default": 32 },
-        { "name": "options", "type": "string", "description": "Additional options as JSON", "required": false }
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Type of secret to generate",
+          "required": false,
+          "default": "token",
+          "enum": ["password", "api_key", "token", "rsa_key"]
+        },
+        {
+          "name": "length",
+          "type": "number",
+          "description": "Length of the generated secret",
+          "required": false,
+          "default": 32
+        },
+        {
+          "name": "options",
+          "type": "string",
+          "description": "Additional options as JSON",
+          "required": false
+        }
       ]
     }
   ],
@@ -70,9 +141,27 @@
   "ui": {
     "section": "General",
     "fields": [
-      { "key": "autoRotate", "label": "Auto Rotate", "type": "boolean", "description": "Automatically rotate detected secrets", "defaultValue": false },
-      { "key": "rotationIntervalDays", "label": "Rotation Interval (Days)", "type": "number", "description": "Days between automatic rotations", "defaultValue": 90 },
-      { "key": "scanOnLoad", "label": "Scan On Load", "type": "boolean", "description": "Scan for secrets when plugin loads", "defaultValue": false }
+      {
+        "key": "autoRotate",
+        "label": "Auto Rotate",
+        "type": "boolean",
+        "description": "Automatically rotate detected secrets",
+        "defaultValue": false
+      },
+      {
+        "key": "rotationIntervalDays",
+        "label": "Rotation Interval (Days)",
+        "type": "number",
+        "description": "Days between automatic rotations",
+        "defaultValue": 90
+      },
+      {
+        "key": "scanOnLoad",
+        "label": "Scan On Load",
+        "type": "boolean",
+        "description": "Scan for secrets when plugin loads",
+        "defaultValue": false
+      }
     ]
   }
 }
