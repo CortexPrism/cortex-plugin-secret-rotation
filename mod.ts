@@ -13,13 +13,13 @@ export async function onLoad(ctx: PluginContext): Promise<void> {
   rotationIntervalDays = rotationVal ? parseInt(rotationVal, 10) : 90;
   scanOnLoad = scanVal === 'true';
 
-  console.log(
+  ctx.logger.info(
     `[cortex-plugin-secret-rotation] Loaded (autoRotate: ${autoRotate}, interval: ${rotationIntervalDays}d, scanOnLoad: ${scanOnLoad})`,
   );
 }
 
-export async function onUnload(_ctx: PluginContext): Promise<void> {
-  console.log('[cortex-plugin-secret-rotation] Unloading...');
+export async function onUnload(ctx: PluginContext): Promise<void> {
+  ctx.logger.info('[cortex-plugin-secret-rotation] Unloading...');
 }
 
 interface SecretPattern {

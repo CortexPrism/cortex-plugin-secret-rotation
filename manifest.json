@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-secret-rotation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Detect hardcoded secrets, rotate credentials, update Cortex vault",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -87,7 +87,12 @@
       "name": "secrets_update_vault",
       "description": "Update a Cortex vault entry with a new secret value",
       "params": [
-        { "name": "key", "type": "string", "description": "Vault key to update", "required": true },
+        {
+          "name": "key",
+          "type": "string",
+          "description": "Vault key to update",
+          "required": true
+        },
         {
           "name": "new_value",
           "type": "string",
@@ -112,7 +117,12 @@
           "description": "Type of secret to generate",
           "required": false,
           "default": "token",
-          "enum": ["password", "api_key", "token", "rsa_key"]
+          "enum": [
+            "password",
+            "api_key",
+            "token",
+            "rsa_key"
+          ]
         },
         {
           "name": "length",
@@ -135,32 +145,38 @@
     "cortex": ">=1.0.0"
   },
   "aiDisclosure": {
-    "tools": ["Claude Code (Anthropic)"],
+    "tools": [
+      "Claude Code (Anthropic)"
+    ],
     "humanReview": true
   },
   "ui": {
-    "section": "General",
-    "fields": [
+    "settings": [
       {
-        "key": "autoRotate",
-        "label": "Auto Rotate",
-        "type": "boolean",
-        "description": "Automatically rotate detected secrets",
-        "defaultValue": false
-      },
-      {
-        "key": "rotationIntervalDays",
-        "label": "Rotation Interval (Days)",
-        "type": "number",
-        "description": "Days between automatic rotations",
-        "defaultValue": 90
-      },
-      {
-        "key": "scanOnLoad",
-        "label": "Scan On Load",
-        "type": "boolean",
-        "description": "Scan for secrets when plugin loads",
-        "defaultValue": false
+        "section": "General",
+        "fields": [
+          {
+            "key": "autoRotate",
+            "label": "Auto Rotate",
+            "type": "boolean",
+            "description": "Automatically rotate detected secrets",
+            "default": false
+          },
+          {
+            "key": "rotationIntervalDays",
+            "label": "Rotation Interval (Days)",
+            "type": "number",
+            "description": "Days between automatic rotations",
+            "default": 90
+          },
+          {
+            "key": "scanOnLoad",
+            "label": "Scan On Load",
+            "type": "boolean",
+            "description": "Scan for secrets when plugin loads",
+            "default": false
+          }
+        ]
       }
     ]
   }
