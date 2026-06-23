@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-secret-rotation",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Detect hardcoded secrets, rotate credentials, update Cortex vault",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -116,7 +116,7 @@
           "type": "string",
           "description": "Type of secret to generate",
           "required": false,
-          "default": "token",
+          "defaultValue": "token",
           "enum": [
             "password",
             "api_key",
@@ -129,7 +129,7 @@
           "type": "number",
           "description": "Length of the generated secret",
           "required": false,
-          "default": 32
+          "defaultValue": 32
         },
         {
           "name": "options",
@@ -142,7 +142,7 @@
   ],
   "dependencies": {},
   "peerDependencies": {
-    "cortex": ">=1.0.0"
+    "cortex": ">=0.51.0"
   },
   "aiDisclosure": {
     "tools": [
@@ -160,21 +160,21 @@
             "label": "Auto Rotate",
             "type": "boolean",
             "description": "Automatically rotate detected secrets",
-            "default": false
+            "defaultValue": false
           },
           {
             "key": "rotationIntervalDays",
             "label": "Rotation Interval (Days)",
             "type": "number",
             "description": "Days between automatic rotations",
-            "default": 90
+            "defaultValue": 90
           },
           {
             "key": "scanOnLoad",
             "label": "Scan On Load",
             "type": "boolean",
             "description": "Scan for secrets when plugin loads",
-            "default": false
+            "defaultValue": false
           }
         ]
       }

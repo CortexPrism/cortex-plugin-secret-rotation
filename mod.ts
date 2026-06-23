@@ -1,4 +1,4 @@
-import type { PluginContext, Tool, ToolCallResult, ToolContext } from './types.ts';
+import type { PluginContext, Tool, ToolCallResult } from 'cortex/plugins';
 
 let autoRotate: boolean;
 let rotationIntervalDays: number;
@@ -148,7 +148,7 @@ const secretsScanTool: Tool = {
     ],
     capabilities: ['fs:read'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const targetPath = args.target_path as string;
@@ -236,7 +236,7 @@ const secretsRotateTool: Tool = {
     ],
     capabilities: ['shell:run'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const secretType = args.secret_type as string;
@@ -315,7 +315,7 @@ const secretsAuditTrailTool: Tool = {
     ],
     capabilities: [],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const since = args.since as string | undefined;
@@ -366,7 +366,7 @@ const secretsUpdateVaultTool: Tool = {
     ],
     capabilities: [],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const key = args.key as string;
@@ -432,7 +432,7 @@ const secretsGenerateTool: Tool = {
     ],
     capabilities: [],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const type = (args.type as string) || 'token';
